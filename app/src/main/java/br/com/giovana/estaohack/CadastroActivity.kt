@@ -1,10 +1,12 @@
 package br.com.giovana.estaohack
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_cadastro.*
 
 class CadastroActivity : AppCompatActivity() {
@@ -50,7 +52,33 @@ class CadastroActivity : AppCompatActivity() {
                 // Imprimindo uma mensagem de erro
                 Toast.makeText(this@CadastroActivity, "Preencha todos os campos" , Toast.LENGTH_LONG).show()
             } else if(spnSexo.selectedItem == "Selecione o sexo"){
-               Toast.makeText(( this@CadastroActivity, "Sexo não selecionado", Toast.LENGTH_LONG).show()
+               Toast.makeText( this@CadastroActivity, "Sexo não selecionado", Toast.LENGTH_LONG).show()
+            } else{
+                // Salvando as informações no Shared Preference
+                meuEditor.putString("nome", nome).apply()
+                meuEditor.putString("sobrenome", sobrenome).apply()
+                meuEditor.putString("email", email).apply()
+                meuEditor.putString("senha", senha).apply()
+                meuEditor.putString("sexo", spnSexo.selectedItem.toString()).apply()
+
+                //Criando o alerta de usuario cadastrado com sucesso
+                /*
+                * Acrecentendo uma mensagem de alerta:
+                * Para adicionar titulo: setTitle
+                * Para adicionar mensagem: setMessage
+                * Para adicionar botao positivo: setPositiveBuutton
+                * Para adicionar botao negativo: setNegativeButton
+                * */
+
+                AlertDialog.Builder(this@CadastroActivity)
+                    .setTitle("Sucesso!!")
+                    .setMessage("Usuario cadastrado!")
+                    .setPositiveButton("Ok"){_,_ ->
+                        //Voltando para a tela de login
+                        //onBackPressed()
+                        startActivity(Intent(this@CadastroActivity, MainActivity::class.java))
+            }
+                    .create().show()
             }
         }
     }

@@ -1,5 +1,6 @@
 package br.com.giovana.estaohack
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,15 +19,18 @@ class LoginActivity : AppCompatActivity() {
         btnEntrar.setOnClickListener {
             val usuario = edtUsuario.text.toString().trim()
             val senha = edtSenha.text.toString().trim()
+            val minhaPreferencia = getSharedPreferences("minha-preferencia", Context.MODE_PRIVATE)
+            val email = minhaPreferencia.getString("email", "Erro preferences")
+            val senhaSalva = minhaPreferencia.getString("senha", "Erro preference")
 
             if(usuario.isEmpty()){
                 txvResultado.text = "Usuário está vazio!!!"
             } else if(senha.isEmpty()){
                 txvResultado.text = "Senha está vazia!!!"
-            }else if(usuario == "Giovana" && senha == "batata1234"){
-                txvResultado.text = "Usuario logado com sucesso :D"
+            }else if(senha == senhaSalva && email == usuario){
+                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
             }else{
-                Toast.makeText(this@LoginActivity, "Usuário ou senha incorretos :(", Toast.LENGTH_LONG).show()
+                txvResultado.text = "Usuario ou senha incorretos"
             }
 
         }

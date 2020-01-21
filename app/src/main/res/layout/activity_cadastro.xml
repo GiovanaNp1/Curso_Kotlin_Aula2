@@ -93,7 +93,7 @@
         android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:hint="Senha"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textColorHint="@android:color/background_light"
@@ -121,4 +121,5 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
